@@ -6,12 +6,11 @@ EmployeeModel employeeJson(String str) =>
 String employeeToJson(EmployeeModel data) => json.encode(data.toJson());
 
 class EmployeeModel {
-  int id;
-  String firstName;
-  String lastName;
+  int? id;
+  String? firstName;
+  String? lastName;
 
-  EmployeeModel(
-      {required this.id, required this.firstName, required this.lastName});
+  EmployeeModel({this.id, this.firstName, this.lastName});
 
   factory EmployeeModel.fromJson(Map<String, dynamic> json) => EmployeeModel(
       firstName: json["firstName"], lastName: json["lastName"], id: json["id"]);
@@ -19,7 +18,7 @@ class EmployeeModel {
   Map<String, dynamic> toJson() =>
       {"firstName": firstName, "lastName": lastName, "id": id};
 
-  String get _firstName => firstName;
+  String? get _firstName => firstName;
 
-  String get _lastName => lastName;
+  String? get _lastName => lastName;
 }

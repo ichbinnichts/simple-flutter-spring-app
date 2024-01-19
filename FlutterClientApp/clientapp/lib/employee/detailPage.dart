@@ -1,3 +1,4 @@
+import 'package:clientapp/employee/updateEmployee.dart';
 import 'package:clientapp/models/EmployeeModel.dart';
 import 'package:flutter/material.dart';
 
@@ -8,9 +9,28 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    goToUpdateEmployee(EmployeeModel e) {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (BuildContext context) => UpdateEmployee(
+          employeeModel: e,
+        ),
+      ));
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(employee.firstName),
+        title: Text(this.employee.firstName!),
+      ),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(this.employee.firstName! + ' ' + this.employee.lastName!),
+          OutlinedButton(
+              onPressed: () async {
+                goToUpdateEmployee(employee);
+              },
+              child: Text('Update employee'))
+        ],
       ),
     );
   }
