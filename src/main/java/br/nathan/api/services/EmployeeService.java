@@ -21,4 +21,24 @@ public class EmployeeService {
         return this.repo.findById(id);
     }
 
+    public boolean save(Employee employee){
+        return this.repo.save(employee);
+    }
+
+    public boolean update(int id, Employee employee){
+        return this.repo.update(id, employee);
+    }
+
+    public boolean deleteById(int id){
+        return this.repo.deleteById(id);
+    }
+
+    public boolean existsById(int id){
+        return this.repo.existsById(id);
+    }
+
+    public boolean existsByFirstNameAndLastName(Employee employee){
+        return this.repo.existsByFirstNameAndLastName(employee.getFirstName(), employee.getLastName());
+    }
+
 }
