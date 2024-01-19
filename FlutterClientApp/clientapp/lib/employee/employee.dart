@@ -1,5 +1,6 @@
 import 'package:clientapp/app.dart';
 import 'package:flutter/material.dart';
+import 'registerEmployee.dart';
 
 class Employee extends StatefulWidget {
   const Employee({super.key});
@@ -9,7 +10,11 @@ class Employee extends StatefulWidget {
 }
 
 class _EmployeeState extends State<Employee> {
-  _addEmployee() {}
+  _gotToAddEmployee() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (BuildContext context) => const RegisterEmployee(),
+    ));
+  }
 
   _iconSearch() {}
 
@@ -17,6 +22,7 @@ class _EmployeeState extends State<Employee> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text('Employee list'),
         actions: <Widget>[
           IconButton(
             onPressed: _iconSearch,
@@ -26,7 +32,7 @@ class _EmployeeState extends State<Employee> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _addEmployee,
+        onPressed: _gotToAddEmployee,
         child: Icon(Icons.add),
         tooltip: 'Add employee',
       ),
