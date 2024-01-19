@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
         ),
         backgroundColor: Colors.black,
         title: const Text(
-          'Employee Management',
+          'Employee Management System',
           style: TextStyle(color: Colors.white),
         ),
       ),
@@ -53,7 +53,15 @@ class _HomeState extends State<Home> {
           padding: EdgeInsets.only(top: minPadding, bottom: minPadding),
           children: const <Widget>[
             DrawerHeader(
-              child: Text('Employee Management'),
+              child: Text(
+                'Employee Management',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.black,
+              ),
             ),
           ],
         ),
