@@ -3,7 +3,7 @@ import 'dart:html';
 
 import 'package:clientapp/alert/myAlertDialog.dart';
 import 'package:flutter/material.dart';
-import 'package:clientapp/models/employee.dart';
+import 'package:clientapp/models/employeeModel.dart';
 import 'package:http/http.dart' as http;
 
 class RegisterEmployee extends StatefulWidget {
@@ -13,7 +13,7 @@ class RegisterEmployee extends StatefulWidget {
   State<RegisterEmployee> createState() => _RegisterEmployeeState();
 }
 
-Future<Employee> registerEmployee(
+Future<EmployeeModel> registerEmployee(
     String firstName, lastName, BuildContext context) async {
   var Url = "http://localhost:8080/api/employee";
 
@@ -27,7 +27,7 @@ Future<Employee> registerEmployee(
       // Assuming the response contains information about the registered employee
       var jsonResponse = jsonDecode(response.body);
 
-      var employee = Employee(
+      var employee = EmployeeModel(
         id: jsonResponse['id'],
         firstName: jsonResponse['firstName'],
         lastName: jsonResponse['lastName'],
