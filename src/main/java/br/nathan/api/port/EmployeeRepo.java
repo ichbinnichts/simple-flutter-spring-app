@@ -19,4 +19,6 @@ public interface EmployeeRepo {
     void delete(Employee employee);
 
     void deleteById(int id);
+
+    boolean update(int id, Employee employee);
 }
