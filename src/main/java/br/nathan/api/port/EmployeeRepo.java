@@ -14,9 +14,11 @@ public interface EmployeeRepo {
 
     boolean existsById(int id);
 
-    void save(Employee employee);
+    boolean save(Employee employee);
 
-    void delete(Employee employee);
+    boolean delete(Employee employee);
 
-    void deleteById(int id);
+    boolean deleteById(int id);
+
+    boolean update(int id, Employee employee);
 }
