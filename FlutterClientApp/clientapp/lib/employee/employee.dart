@@ -30,11 +30,6 @@ class _EmployeeState extends State<Employee> {
         child: Icon(Icons.add),
         tooltip: 'Add employee',
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.only(),
-        ),
-      ),
     );
   }
 }

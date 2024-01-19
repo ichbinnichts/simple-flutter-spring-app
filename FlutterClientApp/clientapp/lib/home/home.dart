@@ -9,9 +9,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  void _iconButton() {
-    print('Icon button');
-  }
+  final minPadding = 5.0;
 
   void _iconSearch() {}
 
@@ -25,11 +23,19 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          tooltip: '',
-          color: Colors.white,
-          onPressed: _iconButton,
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              color: Colors.white,
+              icon: const Icon(
+                Icons.menu,
+              ),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
+          },
         ),
         backgroundColor: Colors.black,
         title: const Text(
@@ -37,9 +43,19 @@ class _HomeState extends State<Home> {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'Welcome to Employee management App!',
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.only(top: minPadding, bottom: minPadding),
+          children: const <Widget>[
+            DrawerHeader(
+              child: Text('Employee Management'),
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
