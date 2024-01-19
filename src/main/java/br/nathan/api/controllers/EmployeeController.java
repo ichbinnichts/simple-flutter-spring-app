@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/employee")
+@CrossOrigin("*")
 public class EmployeeController {
     private final Configuration config = new Configuration();
 
