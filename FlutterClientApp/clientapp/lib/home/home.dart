@@ -12,11 +12,24 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          tooltip: 'Simple Flutter UI',
+          color: Colors.white,
+          onPressed: () {},
+        ),
         backgroundColor: Colors.black,
-        title: Text(
+        title: const Text(
           'Flutter simple UI',
           style: TextStyle(color: Colors.white),
         ),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.search),
+            color: Colors.white,
+          )
+        ],
       ),
     );
   }
