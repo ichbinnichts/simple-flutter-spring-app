@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:clientapp/app.dart';
-import 'package:clientapp/employee/detailEmployeePage.dart';
 import 'package:flutter/material.dart';
 import 'registerEmployee.dart';
 import 'package:http/http.dart' as http;
@@ -50,13 +49,6 @@ class _EmployeeState extends State<Employee> {
     ));
   }
 
-  goToDetailEmployee(EmployeeModel selectedEmployee) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (BuildContext context) =>
-          DetailEmployeePage(employee: selectedEmployee),
-    ));
-  }
-
   _iconSearch() {}
 
   @override
@@ -94,7 +86,7 @@ class _EmployeeState extends State<Employee> {
                     subtitle: Text('${snapshot.data[index].firstName}' +
                         ' ' +
                         '${snapshot.data[index].lastName}'),
-                    onTap: goToDetailEmployee(snapshot.data[index]),
+                    onTap: () {},
                   );
                 });
           },
