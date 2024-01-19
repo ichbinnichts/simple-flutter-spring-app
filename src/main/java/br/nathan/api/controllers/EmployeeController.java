@@ -24,12 +24,12 @@ public class EmployeeController {
     }
 
     @PostMapping()
-    public ResponseEntity post(Employee employee){
+    public ResponseEntity post(@RequestBody Employee employee){
         return this.config.employeeService().save(employee) ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity put(@PathVariable("id")int id, Employee employee){
+    public ResponseEntity put(@PathVariable("id")int id, @RequestBody Employee employee){
         return this.config.employeeService().update(id, employee) ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 
