@@ -127,7 +127,7 @@ public class EmployeeDAO implements EmployeeRepo {
     }
 
     @Override
-    public void save(Employee employee) {
+    public boolean save(Employee employee) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -143,13 +143,15 @@ public class EmployeeDAO implements EmployeeRepo {
 
             preparedStatement.close();
 
+            return true;
+
         }catch(SQLException e){
             throw new RuntimeException();
         }
     }
 
     @Override
-    public void delete(Employee employee) {
+    public boolean delete(Employee employee) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -164,6 +166,7 @@ public class EmployeeDAO implements EmployeeRepo {
 
             preparedStatement.execute();
             preparedStatement.close();
+            return true;
 
         }catch(SQLException e){
             throw new RuntimeException();
@@ -171,7 +174,7 @@ public class EmployeeDAO implements EmployeeRepo {
     }
 
     @Override
-    public void deleteById(int id) {
+    public boolean deleteById(int id) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -184,6 +187,7 @@ public class EmployeeDAO implements EmployeeRepo {
 
             preparedStatement.execute();
             preparedStatement.close();
+            return true;
 
         }catch(SQLException e){
             throw new RuntimeException();
