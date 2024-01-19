@@ -3,10 +3,7 @@ package br.nathan.api.controllers;
 import br.nathan.api.config.Configuration;
 import br.nathan.api.models.Employee;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,4 +22,20 @@ public class EmployeeController {
     public ResponseEntity<Optional<Employee>> findById(@PathVariable("id")int id){
         return !this.config.employeeService().findById(id).isEmpty() ? ResponseEntity.ok(this.config.employeeService().findById(id)) : ResponseEntity.notFound().build();
     }
+
+    @PostMapping()
+    public ResponseEntity post(Employee employee){
+        return this.config.employeeService().save(employee) ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity put(@PathVariable("id")int id, Employee employee){
+        return this.config.employeeService().update(id, employee) ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable("id")int id){
+        return this.config.employeeService().deleteById(id) ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+    }
+
 }
