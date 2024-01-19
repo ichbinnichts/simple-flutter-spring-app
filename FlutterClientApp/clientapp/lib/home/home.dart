@@ -10,6 +10,17 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final minPadding = 5.0;
+  void _goToHome() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (BuildContext context) => const Home(),
+    ));
+  }
+
+  void _goToEmployeeList() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (BuildContext context) => const Employee(),
+    ));
+  }
 
   void _iconSearch() {}
 
@@ -51,7 +62,7 @@ class _HomeState extends State<Home> {
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.only(top: minPadding, bottom: minPadding),
-          children: const <Widget>[
+          children: <Widget>[
             DrawerHeader(
               child: Text(
                 'Employee Management',
@@ -63,6 +74,14 @@ class _HomeState extends State<Home> {
                 color: Colors.black,
               ),
             ),
+            ListTile(
+              title: Text('Home page'),
+              onTap: _goToHome,
+            ),
+            ListTile(
+              title: Text('Employee list page'),
+              onTap: _goToEmployeeList,
+            )
           ],
         ),
       ),
