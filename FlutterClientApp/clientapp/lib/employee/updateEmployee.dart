@@ -107,8 +107,8 @@ class _UpdateEmployeeState extends State<UpdateEmployee> {
                     }
                   },
                   decoration: InputDecoration(
-                      labelText: widget.employeeModel.firstName,
-                      hintText: 'Enter first name',
+                      labelText: 'First name',
+                      hintText: widget.employeeModel.firstName,
                       labelStyle: textStyle,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
@@ -126,8 +126,8 @@ class _UpdateEmployeeState extends State<UpdateEmployee> {
                     }
                   },
                   decoration: InputDecoration(
-                      labelText: widget.employeeModel.lastName,
-                      hintText: 'Enter last name',
+                      labelText: 'Last name',
+                      hintText: widget.employeeModel.lastName,
                       labelStyle: textStyle,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
