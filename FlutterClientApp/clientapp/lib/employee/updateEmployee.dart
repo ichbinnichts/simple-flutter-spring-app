@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:clientapp/alert/myAlertDialog.dart';
+import 'package:clientapp/employee/employee.dart';
 import 'package:clientapp/models/EmployeeModel.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -21,10 +22,11 @@ class UpdateEmployee extends StatefulWidget {
         TextEditingController(text: this.employeeModel.id.toString());
     firstController = TextEditingController(text: this.employeeModel.firstName);
     lastController = TextEditingController(text: this.employeeModel.lastName);
+    return _UpdateEmployeeState();
   }
 
   @override
-  State<UpdateEmployee> createState() => _UpdateEmployeeState();
+  State<UpdateEmployee> createState() => updateEmployeeState(employeeModel);
 }
 
 Future<EmployeeModel> updateEmployee(
@@ -41,15 +43,6 @@ Future<EmployeeModel> updateEmployee(
 
     String responseString = response.body;
     if (response.statusCode == 200) {
-      showDialog(
-          context: context,
-          barrierDismissible: true,
-          builder: (BuildContext dialogContext) {
-            return MyAlertDialog(
-              title: 'Backend response',
-              content: responseString,
-            );
-          });
       return employeeUpdated;
     } else {
       throw Exception(
@@ -62,6 +55,12 @@ Future<EmployeeModel> updateEmployee(
 
 class _UpdateEmployeeState extends State<UpdateEmployee> {
   final minPadding = 5.0;
+
+  goToEmployeePage() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (BuildContext context) => const Employee(),
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,6 +148,7 @@ class _UpdateEmployeeState extends State<UpdateEmployee> {
                   setState(() {
                     widget.employeeModel = employeeUpdated;
                   });
+                  goToEmployeePage();
                 },
                 child: Text('Update'),
               )
