@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:html';
 
 import 'package:clientapp/alert/myAlertDialog.dart';
+import 'package:clientapp/employee/employee.dart';
 import 'package:flutter/material.dart';
 import 'package:clientapp/models/employeeModel.dart';
 import 'package:http/http.dart' as http;
@@ -14,7 +15,7 @@ class RegisterEmployee extends StatefulWidget {
 }
 
 Future<EmployeeModel> registerEmployee(
-    String firstName, lastName, BuildContext context) async {
+    String firstName, String lastName, BuildContext context) async {
   var Url = "http://localhost:8080/api/employee";
 
   try {
@@ -55,7 +56,13 @@ Future<EmployeeModel> registerEmployee(
 class _RegisterEmployeeState extends State<RegisterEmployee> {
   final minPadding = 5.0;
 
-  void _submitBtn() {}
+  goToEmployeePage() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (BuildContext context) => const Employee(),
+    ));
+  }
+
+  EmployeeModel? employeeModel;
 
   TextEditingController firstController = TextEditingController();
   TextEditingController lastController = TextEditingController();
@@ -111,7 +118,18 @@ class _RegisterEmployeeState extends State<RegisterEmployee> {
                 ),
               ),
               ElevatedButton(
-                onPressed: _submitBtn,
+                onPressed: () async {
+                  String firstName = firstController.text;
+                  String lastName = lastController.text;
+                  EmployeeModel employees =
+                      await registerEmployee(firstName, lastName, context);
+                  firstController.text = '';
+                  lastController.text = '';
+                  setState(() {
+                    employeeModel = employees;
+                  });
+                  goToEmployeePage();
+                },
                 child: Text('Submit'),
               )
             ],

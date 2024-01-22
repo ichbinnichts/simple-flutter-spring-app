@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:clientapp/app.dart';
+import 'package:clientapp/employee/detailPage.dart';
 import 'package:flutter/material.dart';
 import 'registerEmployee.dart';
 import 'package:http/http.dart' as http;
@@ -14,6 +15,24 @@ class Employee extends StatefulWidget {
 }
 
 class _EmployeeState extends State<Employee> {
+  void deleteEmployee(int id) async {
+    final url =
+        Uri.parse("http://localhost:8080/api/employee/" + id.toString());
+
+    try {
+      final request = http.Request("DELETE", url);
+      request.headers
+          .addAll(<String, String>{"Content-Type": "application/json"});
+
+      //Passing a body
+      //request.body = jsonEncode(employee)
+
+      final response = await request.send();
+    } catch (error) {
+      throw Exception('Failed to delete. Erro $error');
+    }
+  }
+
   Future<List<EmployeeModel>> fetchEmployees() async {
     var Url = "http://localhost:8080/api/employee";
 
@@ -46,6 +65,12 @@ class _EmployeeState extends State<Employee> {
   _gotToAddEmployee() {
     Navigator.of(context).push(MaterialPageRoute(
       builder: (BuildContext context) => const RegisterEmployee(),
+    ));
+  }
+
+  goToDetailPage(EmployeeModel employeeModel) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (BuildContext context) => DetailPage(employee: employeeModel),
     ));
   }
 
@@ -83,10 +108,27 @@ class _EmployeeState extends State<Employee> {
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
                     title: Text('Name'),
-                    subtitle: Text('${snapshot.data[index].firstName}' +
-                        ' ' +
-                        '${snapshot.data[index].lastName}'),
-                    onTap: () {},
+                    subtitle: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('${snapshot.data[index].firstName}' +
+                            ' ' +
+                            '${snapshot.data[index].lastName}'),
+                        OutlinedButton(
+                          child: Icon(Icons.backspace_outlined),
+                          onPressed: () async {
+                            deleteEmployee(snapshot.data[index].id);
+
+                            setState(() {
+                              fetchEmployees();
+                            });
+                          },
+                        )
+                      ],
+                    ),
+                    onTap: () {
+                      goToDetailPage(snapshot.data[index]);
+                    },
                   );
                 });
           },
