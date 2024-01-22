@@ -128,7 +128,7 @@ class _RegisterEmployeeState extends State<RegisterEmployee> {
                   setState(() {
                     employeeModel = employees;
                   });
-                  goToEmployeePage;
+                  goToEmployeePage();
                 },
                 child: Text('Submit'),
               )
